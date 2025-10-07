@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heark 虚拟货币交易所 - 修复版</title>
+    <title>Heark 虚拟货币交易所</title>
     <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@3.8.0/dist/lightweight-charts.standalone.production.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -13,20 +13,20 @@
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
         }
-        
+    
         body {
             background-color: #000000;
             color: #eaecef;
             line-height: 1.6;
             overflow-x: hidden;
         }
-        
+    
         .container {
             max-width: 1800px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+    
         header {
             display: flex;
             justify-content: space-between;
@@ -36,7 +36,7 @@
             margin-bottom: 20px;
             position: relative;
         }
-        
+    
         .logo {
             font-size: 32px;
             font-weight: bold;
@@ -45,13 +45,13 @@
             letter-spacing: 2px;
             text-shadow: 0 0 10px rgba(42, 157, 244, 0.5);
         }
-        
+    
         .logo::after {
             content: '™';
             font-size: 0.5em;
             vertical-align: super;
         }
-        
+    
         .control-button {
             background: #1c2333;
             color: #2a9df4;
@@ -62,13 +62,8 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: all 0.3s;
         }
-        
-        .control-button:hover {
-            background: #2a3040;
-        }
-        
+    
         .main-content {
             display: grid;
             grid-template-columns: 250px 1fr 350px;
@@ -76,7 +71,7 @@
             gap: 20px;
             margin-bottom: 20px;
         }
-        
+    
         .left-panel {
             grid-row: 1 / 3;
             grid-column: 1;
@@ -86,11 +81,11 @@
             min-height: 800px;
             overflow-y: auto;
         }
-        
+    
         .coin-select-left {
             margin-bottom: 20px;
         }
-        
+    
         .coin-option {
             display: flex;
             justify-content: space-between;
@@ -100,35 +95,33 @@
             cursor: pointer;
             border: 1px solid #2a3040;
             margin-bottom: 10px;
-            transition: all 0.3s;
         }
-        
-        .coin-option:hover {
-            background: #1c2333;
-        }
-        
+    
         .coin-option.active {
             background: #2a3040;
             border-color: #2a9df4;
         }
-        
+    
         .coin-price-small {
             font-size: 14px;
             font-weight: bold;
         }
-        
+    
         .coin-change-small {
             font-size: 12px;
         }
-        
+    
         .price-up-small { color: #00b15d; }
-        
+    
         .price-down-small { color: #ff5b5a; }
-        
+    
         .price-up { color: #00b15d; }
-        
+    
         .price-down { color: #ff5b5a; }
-        
+    
+        .coin-header .price-up, .coin-header .price-down-small { color: #00b15d; }
+        .coin-header .price-down, .coin-header .price-down-small { color: #ff5b5a; }
+    
         .chart-container {
             grid-row: 1;
             grid-column: 2;
@@ -139,14 +132,14 @@
             position: relative;
             z-index: 1;
         }
-        
+    
         .chart-controls {
             position: absolute;
             top: 10px;
             right: 10px;
             z-index: 10;
         }
-        
+    
         .fit-view-btn {
             background: #2a9df4;
             color: white;
@@ -155,26 +148,21 @@
             border-radius: 3px;
             cursor: pointer;
             font-size: 12px;
-            transition: background 0.3s;
         }
-        
-        .fit-view-btn:hover {
-            background: #1a7bc9;
-        }
-        
+    
         .coin-header {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 10px;
         }
-        
+    
         .timeframe-selector {
             display: flex;
             gap: 5px;
             margin-bottom: 15px;
         }
-        
+    
         .timeframe-btn {
             padding: 5px 10px;
             background: #1c2333;
@@ -183,19 +171,14 @@
             cursor: pointer;
             font-size: 12px;
             color: #9aa0a6;
-            transition: all 0.3s;
         }
-        
-        .timeframe-btn:hover {
-            background: #2a3040;
-        }
-        
+    
         .timeframe-btn.active {
             background: #2a3040;
             color: #2a9df4;
             border-color: #2a9df4;
         }
-        
+    
         .order-book {
             grid-row: 1 / 3;
             grid-column: 3;
@@ -206,7 +189,7 @@
             overflow-y: auto;
             position: relative;
         }
-        
+    
         .trade-panel {
             grid-row: 2;
             grid-column: 2;
@@ -216,74 +199,75 @@
             margin-bottom: 20px;
             height: auto;
         }
-        
+    
         .balance-info {
             background: #131722;
             border-radius: 10px;
             padding: 15px;
             margin-top: 10px;
         }
-        
+    
         .panel-title {
             font-size: 16px;
             font-weight: bold;
-            margin-bottom: 10px;
         }
-        
+    
         .trade-mode {
             display: flex;
             gap: 10px;
             margin-bottom: 10px;
         }
-        
+    
         .mode-option {
             padding: 5px 10px;
             background: #1c2333;
             border-radius: 3px;
             cursor: pointer;
             font-size: 12px;
-            transition: all 0.3s;
         }
-        
-        .mode-option:hover {
-            background: #2a3040;
-        }
-        
+    
         .mode-option.active {
             background: #2a9df4;
             color: #fff;
         }
-        
+    
+        .position-buttons {
+            display: none;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+    
+        .position-btn {
+            padding: 5px 10px;
+            background: #1c2333;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+    
         .leverage-selector {
             display: none;
             gap: 5px;
             margin-bottom: 10px;
         }
-        
+    
         .leverage-option {
             padding: 5px 10px;
             background: #1c2333;
             border-radius: 3px;
             cursor: pointer;
             font-size: 12px;
-            transition: all 0.3s;
         }
-        
-        .leverage-option:hover {
-            background: #2a3040;
-        }
-        
+    
         .leverage-option.active {
             background: #2a9df4;
             color: #fff;
         }
-        
         .contract-mode-buttons {
             display: none;
             gap: 10px;
             margin-bottom: 10px;
         }
-        
         .contract-mode-btn {
             flex: 1;
             padding: 8px;
@@ -294,48 +278,41 @@
             color: white;
             transition: background 0.3s;
         }
-        
         .contract-mode-btn.active {
             background: #666 !important;
         }
-        
         .open-position-btn {
             background: #00b15d;
         }
-        
         .open-position-btn:hover:not(.active) {
             background: #00934a;
         }
-        
         .close-position-btn {
             background: #ff5b5a;
         }
-        
         .close-position-btn:hover:not(.active) {
             background: #e04443;
         }
-        
+    
         .input-group {
             margin-bottom: 15px;
             position: relative;
         }
-        
         .input-group.stop-loss,
         .input-group.take-profit {
             display: block;
         }
-        
         .input-group.hidden {
             display: none;
         }
-        
+    
         .input-group label {
             display: block;
             margin-bottom: 5px;
             color: #9aa0a6;
             font-size: 14px;
         }
-        
+    
         .input-group input {
             width: 100%;
             padding: 10px;
@@ -344,7 +321,7 @@
             border-radius: 5px;
             color: #eaecef;
         }
-        
+    
         #copy-price {
             position: absolute;
             right: 5px;
@@ -356,20 +333,15 @@
             border-radius: 3px;
             cursor: pointer;
             font-size: 12px;
-            transition: background 0.3s;
         }
-        
-        #copy-price:hover {
-            background: #1a7bc9;
-        }
-        
+    
         .action-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-top: 20px;
         }
-        
+    
         .buy-btn, .sell-btn {
             padding: 12px;
             border-radius: 5px;
@@ -378,107 +350,101 @@
             border: none;
             transition: background 0.3s;
         }
-        
+    
         .buy-btn {
             background: #00b15d;
             color: white;
         }
-        
+    
         .buy-btn:hover {
             background: #00934a;
         }
-        
+    
         .sell-btn {
             background: #ff5b5a;
             color: white;
         }
-        
+    
         .sell-btn:hover {
             background: #e04443;
         }
-        
+    
         .order-book-title {
             font-size: 16px;
             font-weight: bold;
             margin-bottom: 15px;
         }
-        
+    
         .order-table, .history-table {
             width: 100%;
             border-collapse: collapse;
         }
-        
+    
         .order-table th, .order-table td, .history-table th, .history-table td {
             padding: 8px 5px;
             text-align: right;
             font-size: 13px;
         }
-        
+    
         .order-table th:first-child, .order-table td:first-child, .history-table th:first-child, .history-table td:first-child {
             text-align: left;
         }
-        
+    
         .bid-price { color: #00b15d; }
-        
+    
         .ask-price { color: #ff5b5a; }
-        
+    
         .order-book-tabs {
             display: flex;
             gap: 10px;
-            margin-bottom: 15px;
         }
-        
+    
         .order-book-tab {
             padding: 5px 10px;
             background: #1c2333;
             border-radius: 3px;
             cursor: pointer;
             font-size: 12px;
-            transition: all 0.3s;
         }
-        
-        .order-book-tab:hover {
-            background: #2a3040;
-        }
-        
+    
         .order-book-tab.active {
             background: #2a3040;
             color: #2a9df4;
         }
-        
+    
         .trade-history {
             margin-top: 20px;
         }
-        
+    
         .history-buy { color: #00b15d; }
-        
+    
         .history-sell { color: #ff5b5a; }
-        
-        .positions-section, .history-section {
+    
+        .positions-section, .history-section, .entrusts-section {
             background: #131722;
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 10px;
         }
-        
-        .positions-table, .history-completed-table {
+    
+        .positions-table, .history-completed-table, .entrusts-table {
             width: 100%;
             border-collapse: collapse;
         }
-        
-        .positions-table th, .positions-table td, .history-completed-table th, .history-completed-table td {
+    
+        .positions-table th, .positions-table td, .history-completed-table th, .history-completed-table td, .entrusts-table th, .entrusts-table td {
             padding: 8px 5px;
             text-align: left;
             font-size: 12px;
         }
-        
+    
         .warning {
             text-align: center;
             color: #ff5b5a;
             font-size: 12px;
             margin-top: 10px;
         }
-        
+    
         footer {
             text-align: center;
             padding: 20px;
@@ -487,30 +453,26 @@
             margin-top: 30px;
             font-size: 14px;
         }
-        
+    
         .modal {
             display: none;
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 350px;
             background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
-            justify-content: center;
-            align-items: center;
         }
-        
+    
         .modal-content {
             background: #131722;
             border-radius: 10px;
             padding: 20px;
-            width: 400px;
-            max-width: 90%;
-            max-height: 90%;
+            width: 100%;
+            height: 100%;
             overflow-y: auto;
         }
-        
+    
         .modal-header {
             display: flex;
             justify-content: space-between;
@@ -519,7 +481,7 @@
             border-bottom: 1px solid #2a3040;
             padding-bottom: 10px;
         }
-        
+    
         .close-modal {
             background: none;
             border: none;
@@ -527,19 +489,19 @@
             font-size: 20px;
             cursor: pointer;
         }
-        
+    
         .modal-controls {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
-        
+    
         .modal-control {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+    
         .modal-control input {
             width: 100px;
             padding: 8px;
@@ -548,41 +510,31 @@
             border-radius: 5px;
             color: #eaecef;
         }
-        
+    
         .modal-buttons {
             display: flex;
             justify-content: flex-end;
             gap: 10px;
             margin-top: 20px;
         }
-        
+    
         .modal-btn {
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
             border: none;
-            transition: background 0.3s;
         }
-        
+    
         .modal-btn-primary {
             background: #2a9df4;
             color: white;
         }
-        
-        .modal-btn-primary:hover {
-            background: #1a7bc9;
-        }
-        
+    
         .modal-btn-secondary {
             background: #1c2333;
             color: #9aa0a6;
             border: 1px solid #2a3040;
         }
-        
-        .modal-btn-secondary:hover {
-            background: #2a3040;
-        }
-        
         .pause-btn {
             background: #ff5b5a;
             color: white;
@@ -590,40 +542,17 @@
             border-radius: 5px;
             cursor: pointer;
             border: none;
-            transition: background 0.3s;
         }
-        
-        .pause-btn:hover {
-            background: #e04443;
-        }
-        
         .pause-btn.active {
             background: #00b15d;
         }
-        
-        .pause-btn.active:hover {
-            background: #00934a;
-        }
-        
         .success-message {
             color: #00b15d;
             font-size: 12px;
             margin-top: 10px;
             display: none;
         }
-        
-        .debug-info {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            z-index: 1000;
-        }
-        
+    
         @media (max-width: 1200px) {
             .main-content {
                 grid-template-columns: 1fr;
@@ -634,12 +563,129 @@
                 grid-column: auto;
             }
         }
-        
+    
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 gap: 15px;
             }
+        }
+
+        .asset-button {
+            background: #1c2333;
+            color: #2a9df4;
+            border: 1px solid #2a3040;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-right: 5px; /* 左邊一點點遠 */
+        }
+
+        .asset-modal {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .asset-modal-content {
+            background: #131722;
+            border-radius: 10px;
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .asset-total {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .asset-yield {
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .asset-item {
+            margin-top: 10px;
+        }
+
+        .trade-confirm-modal, .error-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #131722;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 10000;
+            text-align: center;
+            width: 400px; /* 更大一点 */
+        }
+
+        .trade-confirm-modal button, .error-modal button {
+            margin: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .confirm-btn {
+            background: #00b15d;
+            color: white;
+        }
+
+        .cancel-btn {
+            background: #ff5b5a;
+            color: white;
+        }
+
+        .ok-btn {
+            background: #2a9df4;
+            color: white;
+        }
+
+        .trade-success-notification {
+            position: absolute;
+            top: 50px; /* K线图上方 */
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00b15d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 10001;
+            animation: slideHorizontal 1s ease-out;
+            display: none;
+        }
+
+        @keyframes slideHorizontal {
+            from {
+                left: 10px;
+            }
+            to {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
         }
     </style>
 </head>
@@ -647,9 +693,14 @@
     <div class="container">
         <header>
             <div class="logo">Heark</div>
-            <button class="control-button" id="control-panel-btn">
-                <i class="fas fa-cog"></i> 控制面板
-            </button>
+            <div>
+                <button class="asset-button" id="asset-btn">
+                    <i class="fas fa-wallet"></i> 资产
+                </button>
+                <button class="control-button" id="control-panel-btn">
+                    <i class="fas fa-cog"></i> 控制面板
+                </button>
+            </div>
         </header>
         <div class="main-content">
             <div class="left-panel">
@@ -775,19 +826,19 @@
                     <button class="sell-btn" id="sell-btn">卖出</button>
                 </div>
             
-                <div class="balance-info" id="long-balance" style="display: none;">
+                <div class="balance-info" id="long-balance">
                     <div class="data-title">多倉價值</div>
                     <div class="balance-value" id="long-value">0.00 USDT</div>
                 </div>
-                <div class="balance-info" id="short-balance" style="display: none;">
+                <div class="balance-info" id="short-balance">
                     <div class="data-title">空倉價值</div>
                     <div class="balance-value" id="short-value">0.00 USDT</div>
                 </div>
-                <div class="balance-info" id="long-margin" style="display: none;">
+                <div class="balance-info" id="long-margin">
                     <div class="data-title">可平多倉</div>
                     <div class="balance-value" id="long-margin-value">0.00 HRK</div>
                 </div>
-                <div class="balance-info" id="short-margin" style="display: none;">
+                <div class="balance-info" id="short-margin">
                     <div class="data-title">可平空倉</div>
                     <div class="balance-value" id="short-margin-value">0.00 HRK</div>
                 </div>
@@ -799,11 +850,33 @@
                     <div class="data-title">账户余额</div>
                     <div class="balance-value" id="balance-value">100.00 USDT</div>
                 </div>
-                <div class="balance-info" id="margin-info-default" style="display: none;">
+                <div class="balance-info" id="margin-info-default">
                     <div class="data-title">可用保证金</div>
                     <div class="balance-value" id="margin-value">100.00 USDT</div>
                 </div>
             </div>
+        </div>
+        <div class="entrusts-section">
+            <h3>委託</h3>
+            <table class="entrusts-table">
+                <thead>
+                    <tr>
+                        <th>币种</th>
+                        <th>种类</th>
+                        <th>方向</th>
+                        <th>槓桿</th>
+                        <th>数量</th>
+                        <th>成本</th>
+                        <th>最大持倉</th>
+                        <th>限价</th>
+                        <th>预估强平价</th>
+                        <th>委託时间</th>
+                        <th>已委託时長</th>
+                    </tr>
+                </thead>
+                <tbody id="entrusts-body">
+                </tbody>
+            </table>
         </div>
         <div class="positions-section">
             <h3>持仓</h3>
@@ -822,7 +895,7 @@
                         <th>当前盈亏金额</th>
                         <th>当前盈亏%</th>
                         <th>买入时间</th>
-                        <th>买入总耗時</th>
+                        <th>买入总时长</th>
                     </tr>
                 </thead>
                 <tbody id="positions-body">
@@ -902,19 +975,49 @@
             <div class="modal-buttons">
                 <button class="modal-btn pause-btn active" id="pause-btn">暫停中</button>
                 <button class="modal-btn modal-btn-primary" id="reset-chart">重置图表</button>
+                <button class="modal-btn modal-btn-primary" id="clear-history-btn">删除历史成交记录</button>
+                <button class="modal-btn modal-btn-primary" id="clear-yield-btn">删除收益率</button>
                 <button class="modal-btn modal-btn-primary" id="apply-settings">应用设置</button>
             </div>
             <div class="success-message" id="success-message">設置已成功應用</div>
             <div class="success-message" id="pause-message">暫停已成功</div>
             <div class="success-message" id="reset-message">圖表已重置並暫停</div>
             <div class="success-message" id="price-message">價格已調整</div>
+            <div class="success-message" id="clear-history-message">历史成交记录已删除</div>
+            <div class="success-message" id="reset-asset-message">資產已設置成功</div>
         </div>
     </div>
-
-    <div class="debug-info" id="debug-info" style="display: none;">
-        调试信息面板
+    <!-- 资产模态框 -->
+    <div class="asset-modal" id="asset-modal">
+        <div class="asset-modal-content">
+            <div class="modal-header">
+                <h2>资产详情</h2>
+                <button class="close-modal" id="close-asset-modal">&times;</button>
+            </div>
+            <div id="asset-details">
+                <!-- 资产内容将动态生成 -->
+            </div>
+        </div>
     </div>
-
+    <!-- 交易确认模态框 -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="trade-confirm-modal" id="trade-confirm-modal">
+        <h3 id="confirm-title">确认交易</h3>
+        <p id="confirm-message"></p>
+        <div id="confirm-details"></div>
+        <button class="confirm-btn" id="confirm-trade-btn">确认</button>
+        <button class="cancel-btn" id="cancel-trade-btn">取消</button>
+    </div>
+    <!-- 错误弹窗 -->
+    <div class="error-modal" id="error-modal">
+        <h3>错误</h3>
+        <p id="error-message-text"></p>
+        <button class="ok-btn" id="ok-error-btn">确定</button>
+    </div>
+    <!-- 交易成功通知 -->
+    <div class="trade-success-notification" id="trade-success-notification">
+        <p id="success-notification-text"></p>
+    </div>
     <script>
         // 全局变量
         let currentCoin = 'HRK';
@@ -947,6 +1050,7 @@
         let contractMode = 'open'; // 'open' or 'close'
         let pageLoadTime = Math.floor(Date.now() / 1000); // 页面加载时间作为基准，取整到分钟
         let isPaused = true; // 初始暫停
+        let assetHistory = []; // 用于计算收益率的历史资产估值
 
         // 创建图表
         function createChart() {
@@ -988,12 +1092,10 @@
                 wickUpColor: '#00b15d',
             });
         }
-
         // 生成分钟历史数据，从页面加载时间开始，初始为空
         function generateMinuteHistory(coin) {
             return []; // 初始为空，从当前时间开始构建
         }
-
         // 聚合K线数据，确保一致性和可见性
         function aggregateKlines(minuteHistory, tf) {
             if (minuteHistory.length === 0) return [];
@@ -1023,7 +1125,6 @@
             }
             return data.slice(-200); // 限制但足够长时线可见
         }
-
         // 中心定位函数 - 改进：让最新K线在时间轴和价格轴的中心
         function centerChart() {
             if (chartData.length === 0) return;
@@ -1044,7 +1145,6 @@
                 candleSeries.priceScale().setVisiblePriceRange({ from: newFrom, to: newTo });
             }
         }
-
         // 初始化当前蜡烛
         function initCurrentCandle() {
             const now = Math.floor(Date.now() / 1000);
@@ -1065,7 +1165,6 @@
             // 中心定位
             setTimeout(centerChart, 100); // 延迟以确保图表渲染
         }
-
         // 更新K线
         function updateCandle() {
             const coin = coins[currentCoin];
@@ -1091,63 +1190,67 @@
             }
             candleSeries.setData(chartData);
         }
-
         // 更新价格函数，同时更新minuteHistory的最后一个蜡烛
         function updatePrice() {
             if (isPaused) return; // 如果暫停則不更新
-            const coin = coins[currentCoin];
-            const nowSec = Math.floor(Date.now() / 1000);
-            const currentMin = Math.floor(nowSec / 60) * 60;
-            const isUp = Math.random() * 100 < upProbability;
-            const changePercent = (Math.random() * volatility) / 100;
-            const change = isUp ? coin.price * changePercent : -coin.price * changePercent;
-     
-            coin.price = Math.max(0.01, coin.price + change);
-     
-            coin.change = ((coin.price - coin.openPrice) / coin.openPrice * 100);
-     
-            // 更新或添加分钟历史，从加载时间开始
-            if (coins[currentCoin].minuteHistory.length === 0) {
-                coins[currentCoin].minuteHistory.push({
-                    time: pageLoadTime,
-                    open: coin.openPrice,
-                    high: coin.openPrice,
-                    low: coin.openPrice,
-                    close: coin.openPrice
-                });
-            }
-            let lastCandle = coins[currentCoin].minuteHistory[coins[currentCoin].minuteHistory.length - 1];
-            if (lastCandle.time === currentMin) {
-                lastCandle.close = coin.price;
-                lastCandle.high = Math.max(lastCandle.high, coin.price);
-                lastCandle.low = Math.min(lastCandle.low, coin.price);
-            } else {
-                const newCandle = {
-                    time: currentMin,
-                    open: lastCandle.close,
-                    high: coin.price,
-                    low: coin.price,
-                    close: coin.price
-                };
-                coins[currentCoin].minuteHistory.push(newCandle);
-            }
-     
+            Object.keys(coins).forEach(coinKey => {
+                const coin = coins[coinKey];
+                const nowSec = Math.floor(Date.now() / 1000);
+                const currentMin = Math.floor(nowSec / 60) * 60;
+                const isUp = Math.random() * 100 < upProbability;
+                const changePercent = (Math.random() * volatility) / 100;
+                const change = isUp ? coin.price * changePercent : -coin.price * changePercent;
+         
+                coin.price = Math.max(0.01, coin.price + change);
+         
+                coin.change = ((coin.price - coin.openPrice) / coin.openPrice * 100);
+         
+                // 更新或添加分钟历史，从加载时间开始
+                if (coin.minuteHistory.length === 0) {
+                    coin.minuteHistory.push({
+                        time: pageLoadTime,
+                        open: coin.openPrice,
+                        high: coin.openPrice,
+                        low: coin.openPrice,
+                        close: coin.openPrice
+                    });
+                }
+                let lastCandle = coin.minuteHistory[coin.minuteHistory.length - 1];
+                if (lastCandle.time === currentMin) {
+                    lastCandle.close = coin.price;
+                    lastCandle.high = Math.max(lastCandle.high, coin.price);
+                    lastCandle.low = Math.min(lastCandle.low, coin.price);
+                } else {
+                    const newCandle = {
+                        time: currentMin,
+                        open: lastCandle.close,
+                        high: coin.price,
+                        low: coin.price,
+                        close: coin.price
+                    };
+                    coin.minuteHistory.push(newCandle);
+                }
+         
+                // 更新左邊幣種價格
+                const coinOption = document.querySelector(`.coin-option[data-coin="${coinKey}"]`);
+                if (coinOption) {
+                    const priceSmallEl = coinOption.querySelector('.coin-price-small');
+                    const changeSmallEl = coinOption.querySelector('.coin-change-small');
+                    priceSmallEl.textContent = `$${coin.price.toFixed(2)}`;
+                    changeSmallEl.textContent = `${coin.change >= 0 ? '+' : ''}${coin.change.toFixed(2)}%`;
+                    changeSmallEl.className = `coin-change-small ${coin.change >= 0 ? 'price-up-small' : 'price-down-small'}`;
+                }
+            });
+         
             const priceEl = document.getElementById('current-price');
             const changeEl = document.getElementById('price-change');
-            priceEl.textContent = `$${coin.price.toFixed(2)}`;
-            changeEl.textContent = `${coin.change >= 0 ? '+' : ''}${coin.change.toFixed(2)}%`;
-            const isUpChange = coin.change >= 0;
+            const currentCoinObj = coins[currentCoin];
+            priceEl.textContent = `$${currentCoinObj.price.toFixed(2)}`;
+            changeEl.textContent = `${currentCoinObj.change >= 0 ? '+' : ''}${currentCoinObj.change.toFixed(2)}%`;
+            const isUpChange = currentCoinObj.change >= 0;
             priceEl.className = `coin-price ${isUpChange ? 'price-up' : 'price-down'}`;
             changeEl.className = `price-change ${isUpChange ? 'price-up' : 'price-down'}`;
-     
-            // 更新左邊幣種價格
-            const currentCoinEl = document.querySelector('.coin-option.active');
-            const priceSmallEl = currentCoinEl.querySelector('.coin-price-small');
-            const changeSmallEl = currentCoinEl.querySelector('.coin-change-small');
-            priceSmallEl.textContent = `$${coin.price.toFixed(2)}`;
-            changeSmallEl.textContent = `${coin.change >= 0 ? '+' : ''}${coin.change.toFixed(2)}%`;
-            changeSmallEl.className = `coin-change-small ${isUpChange ? 'price-up-small' : 'price-down-small'}`;
-     
+         
             // 重新聚合并更新图表
             chartData = aggregateKlines(coins[currentCoin].minuteHistory, timeframe);
             updateCandle();
@@ -1155,7 +1258,7 @@
             updateOrderBook();
             checkStops();
             updatePositionsDisplay();
-     
+         
             if (autoTrade && Math.random() < 0.05) {
                 const amount = parseFloat(document.getElementById('amount').value) || 0.01;
                 if (Math.random() < 0.5) {
@@ -1164,8 +1267,9 @@
                     openPosition(amount, 'short');
                 }
             }
+            // 更新资产历史
+            updateAssetHistory();
         }
-
         // 生成订单簿数据
         function generateOrderBook() {
             const coin = coins[currentCoin];
@@ -1195,7 +1299,6 @@
             orderBook.asks.sort((a, b) => a.price - b.price);
             return orderBook;
         }
-
         // 更新订单簿显示
         function updateOrderBook() {
             const orderBook = generateOrderBook();
@@ -1213,7 +1316,6 @@
                 row.innerHTML = `<td class="bid-price">${bid.price.toFixed(2)}</td><td>${bid.amount}</td><td>${bid.total}</td>`;
             });
         }
-
         // 添加交易历史，隨機排列
         function addTradeHistory(price, amount, direction) {
             tradeHistory.unshift({ time: new Date(), price, amount, direction });
@@ -1230,7 +1332,6 @@
                 row.innerHTML = `<td>${timeStr}</td><td>${trade.price.toFixed(2)}</td><td>${trade.amount.toFixed(4)}</td><td class="${dirClass}">${dirText}</td>`;
             });
         }
-
         // 更新持仓显示 - 改进：合并合约和现货持仓，方向调整，持续时间固定计算，强平只在负100%时
         function updatePositionsDisplay() {
             const tbody = document.getElementById('positions-body');
@@ -1245,7 +1346,7 @@
                     // 现货
                     pnl = (currentPrice - pos.entryPrice) * pos.amount;
                     pnlPercent = (pnl / (pos.amount * pos.entryPrice)) * 100;
-                    leverageText = '1x';
+                    leverageText = '无';
                     dirText = '買入';
                     typeText = '现货';
                     cost = (pos.amount * pos.entryPrice).toFixed(2);
@@ -1270,11 +1371,13 @@
                 }
                 const pnlClass = pnl >= 0 ? 'price-up' : 'price-down';
                 const openTimeStr = pos.openTime.toLocaleString('zh-CN');
-                const durationSec = ((Date.now() / 1000) - (pos.openTime.getTime() / 1000)).toFixed(1);
-                row.innerHTML = `<td>${pos.coin}/USDT</td><td>${typeText}</td><td>${dirText}</td><td>${leverageText}</td><td>${pos.amount.toFixed(4)}</td><td>${cost}</td><td>${maxPosition}</td><td>${pos.entryPrice.toFixed(2)}</td><td>${liquidationPrice}</td><td class="${pnlClass}">${pnl.toFixed(2)}</td><td class="${pnlClass}">${pnlPercent.toFixed(2)}%</td><td>${openTimeStr}</td><td>${durationSec}秒</td>`;
+                const durationSec = ((Date.now() / 1000) - (pos.openTime.getTime() / 1000));
+                const hours = Math.floor(durationSec / 3600);
+                const minutes = Math.floor((durationSec % 3600) / 60);
+                const durationStr = `${hours}小时${minutes}分钟`;
+                row.innerHTML = `<td>${pos.coin}/USDT</td><td>${typeText}</td><td>${dirText}</td><td>${leverageText}</td><td>${pos.amount.toFixed(4)}</td><td>${cost}</td><td>${maxPosition}</td><td>${pos.entryPrice.toFixed(2)}</td><td>${liquidationPrice}</td><td class="${pnlClass}">${pnl.toFixed(2)}</td><td class="${pnlClass}">${pnlPercent.toFixed(2)}%</td><td>${openTimeStr}</td><td>${durationStr}</td>`;
             });
         }
-
         // 更新歷史成交 - 改进：现货方向为"卖出"
         function updateCompletedTradesDisplay() {
             const tbody = document.getElementById('history-completed-body');
@@ -1286,7 +1389,7 @@
                 let dirText, leverageText, typeText, cost, maxPosition;
                 if (trade.type === 'spot') {
                     dirText = '賣出'; // 现货历史方向固定为卖出
-                    leverageText = '1x';
+                    leverageText = '无';
                     typeText = '现货';
                     cost = (trade.amount * trade.entryPrice).toFixed(2);
                     maxPosition = cost;
@@ -1304,25 +1407,24 @@
                 row.innerHTML = `<td>${trade.coin}/USDT</td><td>${typeText}</td><td>${dirText}</td><td>${leverageText}</td><td>${trade.amount.toFixed(4)}</td><td>${cost}</td><td>${maxPosition}</td><td>${trade.entryPrice.toFixed(2)}</td><td>${trade.exitPrice.toFixed(2)}</td><td class="${pnlClass}">${trade.pnl.toFixed(2)}</td><td class="${pnlClass}">${pnlPercent.toFixed(2)}%</td><td>${openTimeStr}</td><td>${closeTimeStr}</td>`;
             });
         }
-
         // 开仓函数 - 改进：现货添加到spotPositions
         function openPosition(amount, direction) {
             const inputPrice = parseFloat(document.getElementById('price').value);
             if (tradeMode === 'spot') {
                 const cost = amount * inputPrice;
                 if (balance < cost) {
-                    alert('余额不足！');
-                    return;
+                    showErrorModal('余额不足！');
+                    return false;
                 }
                 balance -= cost;
                 spotHoldings[currentCoin] += amount;
-                spotPositions.push({ coin: currentCoin, amount, entryPrice: inputPrice, openTime: new Date(), type: 'spot' });
+                spotPositions.push({ coin: currentCoin, amount, entryPrice: inputPrice, openTime: new Date(), type: 'spot', direction: 'buy' });
                 addTradeHistory(inputPrice, amount, 'buy');
             } else {
                 const margin = (amount * inputPrice) / leverage;
                 if (balance < margin) {
-                    alert('保证金不足！');
-                    return;
+                    showErrorModal('保证金不足！');
+                    return false;
                 }
                 balance -= margin;
                 positions.push({ coin: currentCoin, amount, entryPrice: inputPrice, leverage, direction, openTime: new Date(), type: 'contract' });
@@ -1331,13 +1433,16 @@
             updateBalanceDisplay();
             updatePositionsDisplay();
             updateCompletedTradesDisplay();
+            return true;
         }
-
         // 平仓函数 - 改进：现货从spotPositions移除并添加到历史
         function closePosition(amount, direction, isSpot = false) {
             let posArray = isSpot ? spotPositions : positions;
-            const posIndex = posArray.findIndex(p => p.coin === currentCoin && p.direction === direction && p.amount >= amount);
-            if (posIndex === -1) return;
+            const posIndex = posArray.findIndex(p => p.coin === currentCoin && p.direction === direction && (isSpot || p.leverage === leverage) && p.amount >= amount);
+            if (posIndex === -1) {
+                showErrorModal('没有足够的持仓可卖出！');
+                return false;
+            }
             const pos = posArray[posIndex];
             const currentPrice = coins[currentCoin].price;
             let pnl;
@@ -1362,38 +1467,45 @@
                 openTime: pos.openTime,
                 closeTime: new Date()
             });
-            posArray.splice(posIndex, 1);
-            addTradeHistory(currentPrice, amount, direction === 'long' ? 'sell' : 'buy');
+            if (pos.amount > amount) {
+                pos.amount -= amount;
+            } else {
+                posArray.splice(posIndex, 1);
+            }
+            addTradeHistory(currentPrice, amount, isSpot ? 'sell' : (direction === 'long' ? 'sell' : 'buy'));
             updateBalanceDisplay();
             updatePositionsDisplay();
             updateCompletedTradesDisplay();
+            return true;
         }
-
         // 执行交易 - 改进：现货买/卖逻辑调整
         function executeTrade(amount, action) {
             const inputPrice = parseFloat(document.getElementById('price').value);
+            let success;
             if (tradeMode === 'spot') {
                 if (action === 'buy') {
                     // 买入添加到持仓
-                    openPosition(amount, 'buy'); // 使用openPosition处理
+                    success = openPosition(amount, 'buy'); // 使用openPosition处理
                 } else {
                     // 卖出从持仓移除
-                    closePosition(amount, 'buy', true); // direction for spot as 'buy' to match
+                    success = closePosition(amount, 'buy', true); // direction for spot as 'buy' to match
                 }
             } else { // 合约
-                const direction = contractMode === 'open' ? (action === 'buy' ? 'long' : 'short') : (action === 'buy' ? 'short' : 'long'); // 平多卖出平空买入
+                const direction = contractMode === 'open' ? (action === 'buy' ? 'long' : 'short') : (action === 'buy' ? 'long' : 'short'); // 平多与平空修正
                 const isOpen = contractMode === 'open';
                 if (isOpen) {
-                    openPosition(amount, direction);
+                    success = openPosition(amount, direction);
                 } else {
-                    closePosition(amount, direction, false);
+                    success = closePosition(amount, direction, false);
                 }
+            }
+            if (success) {
+                showTradeSuccessNotification('交易成功！');
             }
             updateBalanceDisplay();
             updatePositionsDisplay();
             updateCompletedTradesDisplay();
         }
-
         // 检查止损止盈
         function checkStops() {
             const currentP = coins[currentCoin].price;
@@ -1415,7 +1527,6 @@
                 }
             });
         }
-
         // 更新余额显示 - 改进：现货持有计算
         function updateBalanceDisplay() {
             // 默认显示
@@ -1467,7 +1578,6 @@
                 document.getElementById('balance-info-default').style.display = 'block';
             }
         }
-
         // 更新止盈止损显示
         function updateStopInputs() {
             const stopLossGroup = document.querySelector('.input-group.stop-loss');
@@ -1480,7 +1590,6 @@
                 takeProfitGroup.classList.add('hidden');
             }
         }
-
         // 更新买入/卖出按钮文本和功能
         function updateActionButtons() {
             const buyBtn = document.getElementById('buy-btn');
@@ -1498,7 +1607,75 @@
             updateStopInputs();
             updateBalanceDisplay();
         }
-
+        // 计算资产总估值
+        function calculateTotalAssets() {
+            let total = balance;
+            // 现货
+            spotPositions.forEach(pos => {
+                total += pos.amount * coins[pos.coin].price;
+            });
+            // 合约 - 只计算成本
+            positions.forEach(pos => {
+                total += pos.amount * pos.entryPrice;
+            });
+            return total;
+        }
+        // 更新资产历史 - 每分钟记录一次
+        function updateAssetHistory() {
+            const now = Date.now();
+            const currentTotal = calculateTotalAssets();
+            assetHistory.push({ time: now, value: currentTotal });
+            // 保留最近24小时的数据
+            assetHistory = assetHistory.filter(h => now - h.time <= 86400000);
+        }
+        // 计算近一天收益率
+        function calculateDailyYield() {
+            if (assetHistory.length < 2) return 0;
+            const first = assetHistory[0].value;
+            const last = assetHistory[assetHistory.length - 1].value;
+            return ((last - first) / first) * 100;
+        }
+        // 显示资产详情
+        function showAssetDetails() {
+            const details = document.getElementById('asset-details');
+            details.innerHTML = '';
+            const total = calculateTotalAssets();
+            const dailyYield = calculateDailyYield();
+            const totalColor = total > 100 ? 'price-up' : (total < 100 ? 'price-down' : '');
+            const yieldColor = dailyYield > 0 ? 'price-up' : (dailyYield < 0 ? 'price-down' : '');
+            details.innerHTML += `<div class="asset-item"><span class="asset-total ${totalColor}">${total.toFixed(2)} USDT</span><span class="asset-yield ${yieldColor}">${dailyYield >= 0 ? '+' : ''}${dailyYield.toFixed(2)}%</span></div>`;
+            details.innerHTML += `<div class="asset-item">拥有的USDT: ${balance.toFixed(2)}</div>`;
+            Object.keys(spotHoldings).forEach(coin => {
+                if (spotHoldings[coin] > 0) {
+                    details.innerHTML += `<div class="asset-item">拥有的${coin}: ${spotHoldings[coin].toFixed(4)} ${coin}</div>`;
+                }
+            });
+            document.getElementById('asset-modal').style.display = 'flex';
+        }
+        // 显示交易确认弹窗
+        let pendingTrade = null;
+        function showTradeConfirm(title, message, details, callback) {
+            document.getElementById('confirm-title').textContent = title;
+            document.getElementById('confirm-message').textContent = message;
+            document.getElementById('confirm-details').innerHTML = details;
+            document.getElementById('trade-confirm-modal').style.display = 'block';
+            document.getElementById('modal-overlay').style.display = 'block';
+            pendingTrade = callback;
+        }
+        // 显示错误弹窗
+        function showErrorModal(message) {
+            document.getElementById('error-message-text').textContent = message;
+            document.getElementById('error-modal').style.display = 'block';
+        }
+        // 显示交易成功通知
+        function showTradeSuccessNotification(message) {
+            const notification = document.getElementById('trade-success-notification');
+            document.getElementById('success-notification-text').textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
         // 初始化
         function init() {
             // 生成历史数据为空，从当前开始
@@ -1519,6 +1696,7 @@
             updateCompletedTradesDisplay();
             updateActionButtons();
             updatePrice();
+            updateAssetHistory(); // 初始资产历史
      
             // 复制市价
             document.getElementById('copy-price').addEventListener('click', () => {
@@ -1578,17 +1756,51 @@
                     updateBalanceDisplay();
                 });
             });
-            // 买/卖按钮
+            // 买/卖按钮 - 修改为弹窗确认
             function setupTradeButtons() {
                 document.getElementById('buy-btn').addEventListener('click', (e) => {
                     e.preventDefault();
                     const amount = parseFloat(document.getElementById('amount').value);
-                    if (amount > 0) executeTrade(amount, 'buy');
+                    const inputPrice = parseFloat(document.getElementById('price').value);
+                    if (amount > 0) {
+                        const title = tradeMode === 'spot' ? '确认买入' : (contractMode === 'open' ? '确认开多' : '确认平多');
+                        const message = `确定要${title} ${amount.toFixed(4)} ${currentCoin} 吗？`;
+                        const cost = tradeMode === 'spot' ? amount * inputPrice : (contractMode === 'open' ? (amount * inputPrice) / leverage : amount * inputPrice * leverage);
+                        const type = tradeMode === 'spot' ? '现货' : '合约';
+                        const dir = tradeMode === 'spot' ? '买入' : (contractMode === 'open' ? '开多' : '平多');
+                        const priceLabel = contractMode === 'open' ? '开仓价' : '平仓价';
+                        const details = `
+                            <p>交易成本: ${cost.toFixed(2)} USDT</p>
+                            <p>交易种类: ${type}</p>
+                            <p>方向: ${dir}</p>
+                            <p>${priceLabel}: ${inputPrice.toFixed(2)} USDT</p>
+                        `;
+                        showTradeConfirm(title, message, details, () => {
+                            executeTrade(amount, 'buy');
+                        });
+                    }
                 });
                 document.getElementById('sell-btn').addEventListener('click', (e) => {
                     e.preventDefault();
                     const amount = parseFloat(document.getElementById('amount').value);
-                    if (amount > 0) executeTrade(amount, 'sell');
+                    const inputPrice = parseFloat(document.getElementById('price').value);
+                    if (amount > 0) {
+                        const title = tradeMode === 'spot' ? '确认卖出' : (contractMode === 'open' ? '确认开空' : '确认平空');
+                        const message = `确定要${title} ${amount.toFixed(4)} ${currentCoin} 吗？`;
+                        const cost = tradeMode === 'spot' ? amount * inputPrice : (contractMode === 'open' ? (amount * inputPrice) / leverage : amount * inputPrice * leverage);
+                        const type = tradeMode === 'spot' ? '现货' : '合约';
+                        const dir = tradeMode === 'spot' ? '卖出' : (contractMode === 'open' ? '开空' : '平空');
+                        const priceLabel = contractMode === 'open' ? '开仓价' : '平仓价';
+                        const details = `
+                            <p>交易成本: ${cost.toFixed(2)} USDT</p>
+                            <p>交易种类: ${type}</p>
+                            <p>方向: ${dir}</p>
+                            <p>${priceLabel}: ${inputPrice.toFixed(2)} USDT</p>
+                        `;
+                        showTradeConfirm(title, message, details, () => {
+                            executeTrade(amount, 'sell');
+                        });
+                    }
                 });
             }
             setupTradeButtons(); // 初始设置
@@ -1644,7 +1856,11 @@
             // 控制面板
             document.getElementById('control-panel-btn').addEventListener('click', (e) => {
                 e.preventDefault();
-                document.getElementById('control-modal').style.display = 'flex';
+                const orderBook = document.querySelector('.order-book');
+                const modal = document.getElementById('control-modal');
+                modal.style.left = orderBook.offsetLeft + 'px';
+                modal.style.height = orderBook.getBoundingClientRect().bottom + 'px';
+                modal.style.display = 'flex';
             });
      
             document.getElementById('close-modal').addEventListener('click', (e) => {
@@ -1654,6 +1870,8 @@
                 document.getElementById('pause-message').style.display = 'none';
                 document.getElementById('reset-message').style.display = 'none';
                 document.getElementById('price-message').style.display = 'none';
+                document.getElementById('clear-history-message').style.display = 'none';
+                document.getElementById('reset-asset-message').style.display = 'none';
             });
      
             window.addEventListener('click', (e) => {
@@ -1663,6 +1881,8 @@
                     document.getElementById('pause-message').style.display = 'none';
                     document.getElementById('reset-message').style.display = 'none';
                     document.getElementById('price-message').style.display = 'none';
+                    document.getElementById('clear-history-message').style.display = 'none';
+                    document.getElementById('reset-asset-message').style.display = 'none';
                 }
             });
      
@@ -1674,7 +1894,11 @@
                 spotPositions = [];
                 updateBalanceDisplay();
                 updatePositionsDisplay();
-                alert(`资产设置為 ${newBalance} USDT`);
+                const resetAssetMsg = document.getElementById('reset-asset-message');
+                resetAssetMsg.style.display = 'block';
+                setTimeout(() => {
+                    resetAssetMsg.style.display = 'none';
+                }, 3000);
             });
             // 暫停按鈕
             document.getElementById('pause-btn').addEventListener('click', (e) => {
@@ -1690,7 +1914,7 @@
                 } else {
                     btn.textContent = '運行中';
                     btn.classList.remove('active');
-                    candleInterval = setInterval(updatePrice, updateInterval * 1000);
+                    candleInterval = setInterval(updatePrice, updateInterval * 1000 / timeRatio); // 应用时间比例
                     pauseMsg.textContent = '運行已成功';
                 }
                 pauseMsg.style.display = 'block';
@@ -1708,7 +1932,7 @@
                 autoTrade = document.getElementById('auto-trade').checked;
                 clearInterval(candleInterval);
                 if (!isPaused) {
-                    candleInterval = setInterval(updatePrice, updateInterval * 1000);
+                    candleInterval = setInterval(updatePrice, updateInterval * 1000 / timeRatio); // 应用时间比例
                 }
                 // 顯示成功訊息
                 const successMsg = document.getElementById('success-message');
@@ -1756,13 +1980,66 @@
                     resetMsg.style.display = 'none';
                 }, 3000);
             });
-
-            // 添加调试信息
-            console.log("初始化完成，所有事件监听器已绑定");
-            document.getElementById('debug-info').textContent = "初始化完成，所有事件监听器已绑定";
-            setTimeout(() => {
-                document.getElementById('debug-info').style.display = 'none';
-            }, 3000);
+            // 删除历史成交记录
+            document.getElementById('clear-history-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                completedTrades = [];
+                updateCompletedTradesDisplay();
+                const clearMsg = document.getElementById('clear-history-message');
+                clearMsg.style.display = 'block';
+                setTimeout(() => {
+                    clearMsg.style.display = 'none';
+                }, 3000);
+            });
+            // 删除收益率
+            document.getElementById('clear-yield-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                assetHistory = [{ time: Date.now(), value: calculateTotalAssets() }];
+                const clearMsg = document.getElementById('success-message');
+                clearMsg.textContent = '收益率已重置';
+                clearMsg.style.display = 'block';
+                setTimeout(() => {
+                    clearMsg.style.display = 'none';
+                }, 3000);
+            });
+            // 资产按钮
+            document.getElementById('asset-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                const leftPanel = document.querySelector('.left-panel');
+                const modal = document.getElementById('asset-modal');
+                modal.style.left = leftPanel.offsetLeft + 'px';
+                modal.style.height = leftPanel.getBoundingClientRect().bottom + 'px';
+                showAssetDetails();
+            });
+            document.getElementById('close-asset-modal').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('asset-modal').style.display = 'none';
+            });
+            window.addEventListener('click', (e) => {
+                if (e.target === document.getElementById('asset-modal')) {
+                    document.getElementById('asset-modal').style.display = 'none';
+                }
+            });
+            // 交易确认
+            document.getElementById('confirm-trade-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (pendingTrade) pendingTrade();
+                document.getElementById('trade-confirm-modal').style.display = 'none';
+                document.getElementById('modal-overlay').style.display = 'none';
+            });
+            document.getElementById('cancel-trade-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('trade-confirm-modal').style.display = 'none';
+                document.getElementById('modal-overlay').style.display = 'none';
+            });
+            // 错误弹窗
+            document.getElementById('ok-error-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('error-modal').style.display = 'none';
+            });
+            // 更新委託显示 (假設暫時空)
+            const entrustsTbody = document.getElementById('entrusts-body');
+            entrustsTbody.innerHTML = ''; // 暫時空
         }
         window.addEventListener('load', init);
         window.addEventListener('resize', () => {
@@ -1773,3 +2050,4 @@
     </script>
 </body>
 </html>
+
